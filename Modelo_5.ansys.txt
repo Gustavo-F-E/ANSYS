@@ -1,0 +1,775 @@
+!*
+!*/INPUT, _codigo/Modelo_5.ansys, txt
+!*
+!* 
+/NOPR 
+KEYW, PR_SET, 1 
+KEYW, PR_STRUC, 1 
+KEYW, PR_THERM, 0 
+KEYW, PR_FLUID, 0 
+KEYW, PR_ELMAG, 0 
+KEYW, MAGNOD, 0 
+KEYW, MAGEDG, 0 
+KEYW, MAGHFE, 0 
+KEYW, MAGELC, 0 
+KEYW, PR_MULTI, 0 
+/GO 
+!* 
+/SYP, MKDIR, '_imagenes5'
+/SYP, MKDIR, '_datos5'
+/SYP, MKDIR, '_archivos5'
+!* 
+/UNITS, MPA
+!* 
+/TITLE, Modelo 5 para el METODO DE FLEXIBILIDAD DE GRIETAS
+/TXTRE, FILE, 51, '_codigo/ansys_logo_transparente', PNG, , PNG
+/PLOPTS, DATE, 0
+/REPLOT
+!*Hecho en ANSYS 2022 R1 Mechanical APDL
+!* 
+/UIS, MSGPOP, 3
+!* 
+/PREP7 
+!* 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!Parametros de entrada que definen la configuracion deseada del estudio
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+!TIPO_DE_ELEMENTO_SOLIDO = 185
+TIPO_DE_ELEMENTO_SOLIDO = 186
+!* 
+!TIPO_DE_ELEMENTO_SUPERFICIE = 181
+TIPO_DE_ELEMENTO_SUPERFICIE = 281
+!* 
+TAMANIO_MALLA = 1
+!TAMANIO_MALLA = 2
+!Solid 186; Tamaño de malla 2
+!NODO_POSITIVO = 4064
+!NODO_NEGATIVO = 1914
+!Solid 186; Tamaño de malla 1
+NODO_POSITIVO = 863
+NODO_NEGATIVO = 15478
+!Solid 185; Tamaño de malla 1
+!NODO_POSITIVO = 4499
+!NODO_NEGATIVO = 2329
+!Solid 185; Tamaño de malla 2
+!NODO_POSITIVO = 1198 !1199
+!NODO_NEGATIVO = 658 !659
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!Selección de los tipos de elementos a utilizar en el proyecto 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+ET, 1, SOLID%TIPO_DE_ELEMENTO_SOLIDO%
+!* 
+ET, 2, SHELL%TIPO_DE_ELEMENTO_SUPERFICIE%
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!Creación del material ortotrópico del compuesto 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+UIMP, 1, EX, EY, EZ, 152878, 9962, 9962
+UIMP, 1, GXY, GYZ, GXZ, 3703, 4427, 3703
+UIMP, 1, PRXY, PRYZ, PRXZ, 0.401, 0.125, 0.401
+!*
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!Creación de las secciones 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+sect, 1, shell, , 
+secdata, 0.2, 1, 89, 3
+secoffset, BOT
+seccontrol, , , , , , , 
+!*
+sect, 2, shell, , 
+secdata, 0.2, 1, -89, 3
+secoffset, BOT
+seccontrol, , , , , , , 
+!*
+sect, 3, shell, , 
+secdata, 0.2, 1, 70, 3
+secoffset, BOT
+seccontrol, , , , , , , 
+!*
+sect, 4, shell, , 
+secdata, 0.2, 1, -70, 3
+secoffset, BOT
+seccontrol, , , , , , , 
+!*
+sect, 5, shell, , 
+secdata, 0.2, 1, 45, 3
+secoffset, BOT
+seccontrol, , , , , , , 
+!*
+sect, 6, shell, , 
+secdata, 0.2, 1, -45, 3
+secoffset, BOT
+seccontrol, , , , , , , 
+!*
+sect, 7, shell, , 
+secdata, 0.2, 1, 30, 3
+secoffset, BOT
+seccontrol, , , , , , , 
+!*
+sect, 8, shell, , 
+secdata, 0.2, 1, -30, 3
+secoffset, BOT
+seccontrol, , , , , , , 
+!*
+sect, 9, shell, , 
+secdata, 0.2, 1, 10, 3
+secoffset, BOT
+seccontrol, , , , , , , 
+!*
+sect, 10, shell, , 
+secdata, 0.2, 1, -10, 3
+secoffset, BOT
+seccontrol, , , , , , , 
+!*
+*DO, i, 1, 10, 1
+SECPLOT, i, , , 
+/IMAGE, SAVE, '_imagenes5/SECCION_%i%'
+*ENDDO
+!*
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!Geometría 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+K, 1, 0, 0, 0 
+/AUTO, 1 
+KWPAVE, 1
+KDELE, 1 
+CYL4, 0, 0, 50
+CYL4, 0, 0, 50.2
+CYL4, 0, 0, 50.4
+CYL4, 0, 0, 50.6
+CYL4, 0, 0, 50.8
+CYL4, 0, 0, 51
+CYL4, 0, 0, 51.2
+CYL4, 0, 0, 51.4
+CYL4, 0, 0, 51.6
+CYL4, 0, 0, 51.8
+CYL4, 0, 0, 52
+CYL4, 0, 0, 52.2
+CYL4, 0, 0, 52.4
+CYL4, 0, 0, 52.6
+CYL4, 0, 0, 52.8
+CYL4, 0, 0, 53
+CYL4, 0, 0, 53.2
+CYL4, 0, 0, 53.4
+CYL4, 0, 0, 53.6
+CYL4, 0, 0, 53.8
+CYL4, 0, 0, 54
+AOVLAP, ALL
+ADELE, 1
+!*
+/AUTO, 1
+wpro, , 90.000000, 
+ASBW, ALL
+ASEL, S, AREA, , 2, 60, 2, 
+ADELE, ALL, , , 1
+ALLSEL, ALL
+wpro, , , 90.000000
+K, 1000, 0.1, , , 
+KWPAVE, 1000 
+KDELE, 1000 
+ASBW, ALL
+K, 1000, -0.1, , , 
+KWPAVE, 1000 
+KDELE, 1000 
+ASBW, ALL
+L0= 3.175
+K, 1000, L0/2, , , 
+KWPAVE, 1000 
+KDELE, 1000 
+ASBW, ALL
+K, 1000, -L0/2, , , 
+KWPAVE, 1000 
+KDELE, 1000 
+ASBW, ALL
+!*
+*DO, i, 1, 21, 1
+LSEL, S, LOC, X, -0.09, 0.09
+LSEL, R, LOC, Y, 49.75+0.2*i, 49.85+0.2*i
+LCOMB, ALL, , 0
+ALLSEL, ALL
+*ENDDO
+!*
+ALLSEL, ALL
+NUMMRG, KP, , , , LOW
+/AUTO, 1 
+/REP, FAST 
+/VIEW, 1, 1, 1, 1 
+/ANG, 1 
+/REP, FAST 
+!*
+VEXT, 22, , , , , 25.4, , , , 
+VEXT, 2, , , , , 25.4, , , ,
+VEXT, 61, , , , , 25.4, , , ,
+VEXT, 32, , , , , 25.4, , , ,
+VEXT, 81, , , , , 25.4, , , , 
+VEXT, 23, , , , , 25.4, , , ,
+VEXT, 4, , , , , 25.4, , , ,
+VEXT, 62, , , , , 25.4, , , ,
+VEXT, 33, , , , , 25.4, , , ,
+VEXT, 82, , , , , 25.4, , , , 
+VEXT, 24, , , , , 25.4, , , ,
+VEXT, 6, , , , , 25.4, , , ,
+VEXT, 63, , , , , 25.4, , , ,
+VEXT, 34, , , , , 25.4, , , ,
+VEXT, 83, , , , , 25.4, , , , 
+VEXT, 25, , , , , 25.4, , , ,
+VEXT, 8, , , , , 25.4, , , ,
+VEXT, 64, , , , , 25.4, , , ,
+VEXT, 35, , , , , 25.4, , , ,
+VEXT, 84, , , , , 25.4, , , , 
+VEXT, 26, , , , , 25.4, , , ,
+VEXT, 10, , , , , 25.4, , , ,
+VEXT, 65, , , , , 25.4, , , ,
+VEXT, 36, , , , , 25.4, , , ,
+VEXT, 85, , , , , 25.4, , , , 
+VEXT, 27, , , , , 25.4, , , ,
+VEXT, 12, , , , , 25.4, , , ,
+VEXT, 66, , , , , 25.4, , , ,
+VEXT, 37, , , , , 25.4, , , ,
+VEXT, 86, , , , , 25.4, , , , 
+VEXT, 28, , , , , 25.4, , , ,
+VEXT, 14, , , , , 25.4, , , ,
+VEXT, 67, , , , , 25.4, , , ,
+VEXT, 38, , , , , 25.4, , , ,
+VEXT, 87, , , , , 25.4, , , , 
+VEXT, 29, , , , , 25.4, , , ,
+VEXT, 16, , , , , 25.4, , , ,
+VEXT, 68, , , , , 25.4, , , ,
+VEXT, 39, , , , , 25.4, , , ,
+VEXT, 88, , , , , 25.4, , , , 
+VEXT, 30, , , , , 25.4, , , ,
+VEXT, 18, , , , , 25.4, , , ,
+VEXT, 69, , , , , 25.4, , , ,
+VEXT, 40, , , , , 25.4, , , ,
+VEXT, 89, , , , , 25.4, , , , 
+VEXT, 31, , , , , 25.4, , , ,
+VEXT, 20, , , , , 25.4, , , ,
+VEXT, 70, , , , , 25.4, , , ,
+VEXT, 41, , , , , 25.4, , , ,
+VEXT, 90, , , , , 25.4, , , , 
+VEXT, 101, , , , , 25.4, , , ,
+VEXT, 111, , , , , 25.4, , , ,
+VEXT, 71, , , , , 25.4, , , ,
+VEXT, 42, , , , , 25.4, , , ,
+VEXT, 91, , , , , 25.4, , , , 
+VEXT, 102, , , , , 25.4, , , ,
+VEXT, 112, , , , , 25.4, , , ,
+VEXT, 72, , , , , 25.4, , , ,
+VEXT, 44, , , , , 25.4, , , ,
+VEXT, 92, , , , , 25.4, , , , 
+VEXT, 103, , , , , 25.4, , , ,
+VEXT, 113, , , , , 25.4, , , ,
+VEXT, 73, , , , , 25.4, , , ,
+VEXT, 46, , , , , 25.4, , , ,
+VEXT, 93, , , , , 25.4, , , , 
+VEXT, 104, , , , , 25.4, , , ,
+VEXT, 114, , , , , 25.4, , , ,
+VEXT, 74, , , , , 25.4, , , ,
+VEXT, 48, , , , , 25.4, , , ,
+VEXT, 94, , , , , 25.4, , , , 
+VEXT, 105, , , , , 25.4, , , ,
+VEXT, 115, , , , , 25.4, , , ,
+VEXT, 75, , , , , 25.4, , , ,
+VEXT, 50, , , , , 25.4, , , ,
+VEXT, 95, , , , , 25.4, , , , 
+VEXT, 106, , , , , 25.4, , , ,
+VEXT, 116, , , , , 25.4, , , ,
+VEXT, 76, , , , , 25.4, , , ,
+VEXT, 52, , , , , 25.4, , , ,
+VEXT, 96, , , , , 25.4, , , , 
+VEXT, 107, , , , , 25.4, , , ,
+VEXT, 117, , , , , 25.4, , , ,
+VEXT, 77, , , , , 25.4, , , ,
+VEXT, 54, , , , , 25.4, , , ,
+VEXT, 97, , , , , 25.4, , , , 
+VEXT, 108, , , , , 25.4, , , ,
+VEXT, 118, , , , , 25.4, , , ,
+VEXT, 78, , , , , 25.4, , , ,
+VEXT, 56, , , , , 25.4, , , ,
+VEXT, 98, , , , , 25.4, , , , 
+VEXT, 109, , , , , 25.4, , , ,
+VEXT, 119, , , , , 25.4, , , ,
+VEXT, 79, , , , , 25.4, , , ,
+VEXT, 58, , , , , 25.4, , , ,
+VEXT, 99, , , , , 25.4, , , , 
+VEXT, 110, , , , , 25.4, , , ,
+VEXT, 120, , , , , 25.4, , , ,
+VEXT, 80, , , , , 25.4, , , ,
+VEXT, 60, , , , , 25.4, , , ,
+VEXT, 100, , , , , 25.4, , , , 
+!*
+NUMMRG, KP, , , , LOW
+!*
+WPCSYS, -1, 0
+WPSTYLE, , , , , , , , 0 
+!*
+VPLOT
+/IMAGE, SAVE, '_imagenes5/VOLUMENES'
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!MALLADO 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+VATT, 1, , 1, 0
+AATT, 1, , 2, 0, 1
+ESIZE, TAMANIO_MALLA, 0, 
+!*
+*DIM, MALLADO_VOLUMENES, ARRAY, 100, 4, 1
+!*
+MALLADO_VOLUMENES(1, 1, 1) = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+MALLADO_VOLUMENES(19, 1, 1) = 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36
+MALLADO_VOLUMENES(37, 1, 1) = 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54
+MALLADO_VOLUMENES(55, 1, 1) = 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72
+MALLADO_VOLUMENES(73, 1, 1) = 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90
+MALLADO_VOLUMENES(91, 1, 1) = 91, 92, 93, 94, 95, 96, 97, 98, 99, 100
+!*
+MALLADO_VOLUMENES(1, 2, 1) = 14, 14,  46,  46,  62, 6, 6,  34,  34,  54, 148, 148, 155, 155, 160, 168, 168, 175
+MALLADO_VOLUMENES(19, 2, 1) = 175, 180, 188, 188, 195, 195, 200, 208, 208, 215, 215, 220, 228, 228, 235, 235, 240, 248
+MALLADO_VOLUMENES(37, 2, 1) = 248, 255, 255, 260, 268, 268, 275, 275, 280, 288, 288, 295, 295, 300, 308, 308, 315, 315
+MALLADO_VOLUMENES(55, 2, 1) = 320, 328, 328, 335, 335, 340, 348, 348, 355, 355, 360, 368, 368, 375, 375, 380, 388, 388
+MALLADO_VOLUMENES(73, 2, 1) = 395, 395, 400, 408, 408, 415, 415, 420, 428, 428, 435, 435, 440, 448, 448, 455, 455, 460
+MALLADO_VOLUMENES(91, 2, 1) = 468, 468, 475, 475, 480, 488, 488, 495, 495, 500
+!*
+MALLADO_VOLUMENES(1, 3, 1) = 6, 6,  34,  34,  54, 148, 148, 155, 155, 160, 168, 168, 175, 175, 180, 188, 188, 195
+MALLADO_VOLUMENES(19, 3, 1) = 195, 200, 208, 208, 215, 215, 220, 228, 228, 235, 235, 240, 248, 248, 255, 255, 260, 268
+MALLADO_VOLUMENES(37, 3, 1) = 268, 275, 275, 280, 288, 288, 295, 295, 300, 308, 308, 315, 315, 320, 328, 328, 335, 335
+MALLADO_VOLUMENES(55, 3, 1) = 340, 348, 348, 355, 355, 360, 368, 368, 375, 375, 380, 388, 388, 395, 395, 400, 408, 408
+MALLADO_VOLUMENES(73, 3, 1) = 415, 415, 420, 428, 428, 435, 435, 440, 448, 448, 455, 455, 460, 468, 468, 475, 475, 480
+MALLADO_VOLUMENES(91, 3, 1) = 488, 488, 495, 495, 500, 508, 508, 515, 515, 520
+!*
+MALLADO_VOLUMENES(1, 4, 1) = 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4
+MALLADO_VOLUMENES(19, 4, 1) = 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 8
+MALLADO_VOLUMENES(37, 4, 1) = 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10
+MALLADO_VOLUMENES(55, 4, 1) = 10, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 7, 7, 7, 7, 7, 6, 6
+MALLADO_VOLUMENES(73, 4, 1) = 6, 6, 6, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3
+MALLADO_VOLUMENES(91, 4, 1) = 2, 2, 2, 2, 2, 1, 1, 1, 1
+!*
+*DO, i, 1, 100, 1
+SECNUM, MALLADO_VOLUMENES(i, 4, 1)
+VEORIENT, MALLADO_VOLUMENES(i, 1, 1), KP, MALLADO_VOLUMENES(i, 2, 1), MALLADO_VOLUMENES(i, 3, 1), 
+VMESH, MALLADO_VOLUMENES(i, 1, 1)
+*ENDDO
+!*
+EPLOT
+/IMAGE, SAVE, '_imagenes5/ELEMENTOS'
+!*
+*GET, NUMERO_DE_ELEMENTOS, ELEM, , COUNT
+*GET, NUMERO_DE_NODOS, NODE, , COUNT
+!*
+NSEL, S, , , NODO_POSITIVO
+CM, extremo_galga_positivo, NODE
+ALLSEL, ALL
+NSEL, S, , , NODO_NEGATIVO
+CM, extremo_galga_negativo, NODE
+ALLSEL, ALL
+!*
+NSEL, S, LOC, X, -1.5875
+NSEL, A, LOC, X, 1.5875
+NSEL, R, LOC, Y, 49.975 
+NSEL, R, LOC, Z, 12.7
+NLIST, ALL, , , , NODE, NODE, NODE
+ALLSEL, ALL
+!*
+!********************** Verificar que las variables 'extremo_galga_positivo' y 'extremo_galga_negativo'***********
+!**************************** coincidan con los valores de la lista para nodos ubicados en **********************
+!***************************************** ±X = 1.5875; Y = 49.975; Z = 12.7 *************************************
+!************************ ya que el numero de nodo de esa ubicacion cambia según el ******************************
+!************************ tipo de elemento (SOLID185 o SOLID186) y el tamaño de malla ****************************
+!*
+/UIS, MSGPOP, 0
+*MSG, UI, NUMERO_DE_ELEMENTOS, NUMERO_DE_NODOS
+El número de elementos en el modelo sólido es de %I %/&
+El número de nodos en el modelo sólido es de %I
+/UIS, MSGPOP, 3
+!*
+/VIEW, 1, , ,1 
+/ANG, 1 
+/REP, FAST 
+/ZOOM, 1, SCRN, 0.332720, 0.570324, 0.374277, 0.498561
+/PNUM, KP, 0 
+/PNUM, LINE, 0
+/PNUM, AREA, 0
+/PNUM, VOLU, 0
+/PNUM, NODE, 0
+/PNUM, TABN, 0
+/PNUM, SVAL, 0
+/NUMBER, 0 
+!* 
+/COLOR,OUTL,BLAC
+/PNUM, SECT, 1
+EPLOT
+/IMAGE, SAVE, '_imagenes5/SECCIONES'
+/COLOR,OUTL,WHIT
+!*
+/PNUM, SECT, 0
+/VIEW, 1, 1, 1, 1 
+/ANG, 1 
+/AUTO, 1 
+/REP, FAST 
+/REPLOT
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!Cambiando el sistema de coordenadas de los elementos creados para que tengan configurado correctamente su ángulo respecto de la capa a la que pertenecen
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+!Establezco un parámetro llamado PI con el valor de π
+*SET, PI, ATAN(1)*4
+*DIM, CENTROIDES, ARRAY, NUMERO_DE_ELEMENTOS, 5, 1
+!*
+*DO, i, 1, NUMERO_DE_ELEMENTOS, 1
+!Obtiene la coordenada X del centroide del elemento i
+*GET, X_i, ELEM, i, CENT, X
+!Obtiene la coordenada Y del centroide del elemento i
+*GET, Y_i, ELEM, i, CENT, Y
+!Obtiene la coordenada Z del centroide del elemento i
+*GET, Z_i, ELEM, i, CENT, Z
+!Calculo el ángulo β Z para realizar la transformación de coordenadas locales del elemento
+*IF, X_i, LT, 0, THEN
+*SET, BETA_i, (ATAN(Y_i/X_i))*180/PI+180
+*ELSEIF, X_i, EQ, 0, THEN
+*SET, BETA_i, 90
+*ELSE
+*SET, BETA_i, (ATAN(Y_i/X_i))*180/PI
+*ENDIF
+!*
+!Creación del sistema local de coordenadas i+100 (el numero de orden del primer elemento debe ser mayor a 10 para evitar problemas de designación con los sistemas de coordenadas que ya vienen predefinidos en ANSYS APLD. El segundo parámetro establece que el sistema va a ser cartesiano. Luego se dan las coordenadas del centroide del elemento que es igual al origen de coordenadas deseados (no es estrictamente necesario pero así es visualmente menos confuso que establecer todos los sistemas de coordenadas de todos los elementos en el origen 0, 0, 0) respecto del sistema global cartesiano 0. Finalmente, se especifican las rotaciones que deben realizar los ejes coordenados, según el parámetro calculado BETAi, el angulo de capa deseado y 90 grados, porque el autor investigó que de esta forma quedan correctamente orientados los elementos teniendo en cuenta la ubicación espacial de los elementos y la dirección de la fibra.
+!*
+CENTROIDES(i, 1, 1)= i
+CENTROIDES(i, 2, 1)= X_i
+CENTROIDES(i, 3, 1)= Y_i
+CENTROIDES(i, 4, 1)= Z_i
+CENTROIDES(i, 5, 1)= BETA_i
+!*
+LOCAL, i+100, 0, X_i, Y_i, Z_i, BETA_i, 0, 90
+!*
+! El objetivo de este comando es asignar esos sistema de coordenadas creados a cada elemento de forma individualizada.
+EMODIF, i, ESYS, i+100
+!Luego de cada ciclo del bucle, como estoy creando sistemas de coordenadas locales, por cada uno que creo, el mismo queda establecido como el sistema de coordenadas de allí en más, con lo cual, debo volver a setear como mi sistema de coordenadas al sistema global cartesiano 0, para no tener problemas con la creación de los sistemas de coordenadas subsiguientes
+CSYS, 0
+!*
+*ENDDO
+!*
+/ZOOM, 1, SCRN, 1.198054, -0.709365, 1.243717, -0.758528 
+/VIEW, 1, 0.609760759236 , 0.555498050513 , 0.565343906284
+/ANG, 1, 1.22485232794 
+/REPLO 
+/VIEW, 1, 0.649599288274 , 0.536513349757 , 0.538678187981
+/ANG, 1, 2.97254342969 
+!* 
+/SHOW, WIN32
+!*  
+/PSF,DEFA, ,1,0,1   
+/PBF,DEFA, ,1   
+/PSYMB,CS,0 
+/PSYMB,NDIR,0   
+/PSYMB,ESYS,1   
+/PSYMB,LDIV,0   
+/PSYMB,LDIR,0   
+/PSYMB,ADIR,0   
+/PSYMB,ECON,0   
+/PSYMB,XNODE,0  
+/PSYMB,DOT,1
+/PSYMB,PCONV,   
+/PSYMB,LAYR,0   
+/PSYMB,FBCS,0   
+!*  
+/PBC,ALL, ,1
+/REP
+/TRLCY,ELEM,1,ALL,,,
+/REPLOT 
+*DO, i, 1, 10, 1
+VSEL, S, , , 5*i-4, 5*i, 1
+ESLV, S
+!ESEL, S, SEC, , i 
+CM, ELEMENTOS_CAPA_%i%, ELEM
+EPLOT
+/IMAGE, SAVE, '_imagenes5/CAPA_%i%'
+ALLSEL, ALL 
+*ENDDO
+!*
+*DO, i, 11, 20, 1
+VSEL, S, , , 5*i-4, 5*i, 1
+ESLV, S
+!ESEL, S, SEC, , 21-i
+CM, ELEMENTOS_CAPA_%i%, ELEM
+EPLOT
+/IMAGE, SAVE, '_imagenes5/CAPA_%i%'
+ALLSEL, ALL 
+*ENDDO
+!*
+/TRLCY,ELEM,0,ALL,,,
+/PSYMB, ESYS, 0
+/DEVICE, VECTOR, 0
+!* 
+/AUTO, 1 
+/REP, FAST 
+/VIEW, 1, 1, 1, 1 
+/ANG, 1 
+/REP, FAST 
+!*
+ASEL, S, LOC, Y, -0.01, 0.01
+CM, APOYOS, AREA 
+DA, ALL, ALL, 0
+ALLSEL, ALL
+/IMAGE, SAVE, '_imagenes5/APOYOS'
+LSCLEAR, ALL
+!*
+*DIM, BORRAR_VOLUMEN, ARRAY, 10, 1, 1
+BORRAR_VOLUMEN(1, 1, 1)= 98, 93, 88, 83, 78, 73, 68, 63, 58, 53
+!*
+*DO, i, 1, 10, 1
+VSEL, S, , , BORRAR_VOLUMEN(i, 1, 1)
+ESLV, S
+CM, ELEMENTOS_PASO_%i%, ELEM
+ALLSEL, ALL
+*ENDDO
+!*
+*DIM, FUERZA_AREAS, ARRAY, 10, 2, 1
+FUERZA_AREAS(1, 1, 1)= 585, 560, 535, 510, 485, 460, 435, 410, 385, 360
+FUERZA_AREAS(1, 2, 1)= 590, 565, 540, 515, 490, 465, 440, 415, 390, 365
+!*
+*DIM, MATRIZ_DE_COMPLIANCIAS, ARRAY, 10, 10, 1
+*DIM, DESPLAZAMIENTO_NODO_POSITIVO, ARRAY, 10, 10, 1
+*DIM, DESPLAZAMIENTO_NODO_NEGATIVO, ARRAY, 10, 10, 1
+!*
+*SET, NUMERO_DE_ITERACIONES, 0
+!*
+/VIEW, 1, , , 1 
+/ANG, 1 
+/REP, FAST 
+/ZOOM, 1, SCRN, 0.3245, 0.566, 0.32, 0.501
+!*
+*DIM, duraciones_de_pasos, ARRAY, 55, 2, 1
+*GET, tiempo_0, ACTIVE, , TIME, CPU
+tiempo_00 = tiempo_0
+!*
+CDWRITE, ALL, '_archivos5/prueba_corridas', 'cdb', , '_archivos5/prueba_corridas', 'iges' 
+CDWRITE, DB, '_archivos5/prueba_corridas_DB', 'cdb', , '', '' 
+!*
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!! Comienzo de las iteraciones
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!*
+*DO, jj, 1, 10, 1
+VCLEAR, BORRAR_VOLUMEN(jj, 1, 1)
+VDELE, BORRAR_VOLUMEN(jj, 1, 1)
+/REPLOT
+/IMAGE, SAVE, '_imagenes5/PASO_%jj%'
+CDWRITE, ALL, '_archivos5/prueba_corridas_paso_%jj%', 'cdb', , '_archivos5/prueba_corridas_paso_%jj%', 'iges' 
+CDWRITE, DB, '_archivos5/prueba_corridas_paso_%jj%_DB', 'cdb', , '', '' 
+!Estabamos en el preprocesado /PREP7 
+FINISH 
+!* 
+*DO, ii, 1, jj, 1
+/SOL
+ANTYPE, 0
+!* 
+*DO, kk, 1, 40, 1
+DA, APOYOS(kk, 1, 1), ALL, 0
+*ENDDO
+!* 
+SFA, FUERZA_AREAS(ii, 1, 1), 1, PRES, -1 
+SFA, FUERZA_AREAS(ii, 2, 1), 1, PRES, -1 
+NUMERO_DE_ITERACIONES = 1+NUMERO_DE_ITERACIONES
+/IMAGE, SAVE, '_imagenes5/CARGAS_%NUMERO_DE_ITERACIONES%'
+/STATUS, SOLU
+SOLVE 
+FINISH
+/POST1 
+SET, LAST
+*GET, DESPLAZAMIENTO_NODO_POSITIVO(jj, ii, 1), NODE, NODO_POSITIVO, U, Z
+*GET, DESPLAZAMIENTO_NODO_NEGATIVO(jj, ii, 1), NODE, NODO_NEGATIVO, U, Z
+MATRIZ_DE_COMPLIANCIAS (jj, ii, 1) = (2*DESPLAZAMIENTO_NODO_POSITIVO(jj, ii, 1))/L0
+FINISH
+/SOL
+LSCLEAR, ALL
+FINISH
+/PREP7 
+*GET, tiempo_1, ACTIVE, , TIME, CPU
+duraciones_de_pasos(NUMERO_DE_ITERACIONES, 1, 1)= NUMERO_DE_ITERACIONES
+duraciones_de_pasos(NUMERO_DE_ITERACIONES, 2, 1)= tiempo_1-tiempo_0
+tiempo_0= tiempo_1
+!*
+/UIS, MSGPOP, 0
+*MSG, NOTE, jj, ii, NUMERO_DE_ITERACIONES, duraciones_de_pasos(NUMERO_DE_ITERACIONES, 2, 1)
+El número de paso es %I. %/&
+El subpaso es el %I. %/&
+El número total de iteraciones hasta el momento es de %I. %/&
+La duracion de esta corrida es de %G segundos.
+/UIS, MSGPOP, 3
+*ENDDO
+*ENDDO
+!*
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!! Fin de las iteraciones
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!*
+*STATUS, MATRIZ_DE_COMPLIANCIAS, , , , , , , , , , , 0
+!*
+*GET, E_x, EX, 1, TEMP, , 
+*GET, E_y, EY, 1, TEMP, , 
+*GET, E_z, EZ, 1, TEMP, , 
+*GET, G_xy, GXY, 1, TEMP, , 
+*GET, G_yz, GYZ, 1, TEMP, , 
+*GET, G_xz, GXZ, 1, TEMP, , 
+*GET, PR_xy, PRXY, 1, TEMP, , 
+*GET, PR_yz, PRYZ, 1, TEMP, , 
+*GET, PR_xz, PRXZ, 1, TEMP, , 
+!*
+*DIM, prop_material, ARRAY, 9, 1, 1
+prop_material(1) = E_x/1000, E_y/1000, E_z/1000, PR_xy, PR_yz, PR_xz, G_xy/1000, G_yz/1000, G_xz/1000
+!*
+*DIM, prop_material_string, STRING, 8, 9 !Creo una matriz de cadena de caracteres de 9 filas y 8 digitos como máximo
+prop_material_string(1, 1)= 'E_x'
+prop_material_string(1, 2)= 'E_y'
+prop_material_string(1, 3)= 'E_z'
+prop_material_string(1, 4)= 'NU_xy'
+prop_material_string(1, 5)= 'NU_yz'
+prop_material_string(1, 6)= 'NU_xz'
+prop_material_string(1, 7)= 'G_xy'
+prop_material_string(1, 8)= 'G_yz'
+prop_material_string(1, 9)= 'G_xz'
+!*
+*DIM, prop_material_string_unidades, STRING, 8, 9
+prop_material_string_unidades(1, 1) = 'GPa'
+prop_material_string_unidades(1, 2) = 'GPa'
+prop_material_string_unidades(1, 3) = 'GPa'
+prop_material_string_unidades(1, 4) = 'mm/mm'
+prop_material_string_unidades(1, 5) = 'mm/mm'
+prop_material_string_unidades(1, 6) = 'mm/mm'
+prop_material_string_unidades(1, 7) = 'GPa'
+prop_material_string_unidades(1, 8) = 'GPa'
+prop_material_string_unidades(1, 9) = 'GPa'
+!*
+*cfopen, _datos5/material_corrida_1, txt
+*VWRITE, prop_material_string(1, 1), ':', prop_material(1), prop_material_string_unidades(1, 1)
+(A5, A3, g16.6, A5)
+*cfclos
+!*
+*DIM, pasos, STRING, 8, 10 !Creo una matriz de cadena de caracteres de 9 filas y 8 digitos como máximo
+pasos(1, 1)= 'Paso 01:'
+pasos(1, 2)= 'Paso 02:'
+pasos(1, 3)= 'Paso 03:'
+pasos(1, 4)= 'Paso 04:'
+pasos(1, 5)= 'Paso 05:'
+pasos(1, 6)= 'Paso 06:'
+pasos(1, 7)= 'Paso 07:'
+pasos(1, 8)= 'Paso 08:'
+pasos(1, 9)= 'Paso 09:'
+pasos(1, 10)= 'Paso 10:'
+!*
+*cfopen, _datos5/matriz_de_compliancias, txt
+*VWRITE, pasos(1, 1), ' ', MATRIZ_DE_COMPLIANCIAS(1, 1), MATRIZ_DE_COMPLIANCIAS(1, 2), MATRIZ_DE_COMPLIANCIAS(1, 3), MATRIZ_DE_COMPLIANCIAS(1, 4), MATRIZ_DE_COMPLIANCIAS(1, 5), MATRIZ_DE_COMPLIANCIAS(1, 6), MATRIZ_DE_COMPLIANCIAS(1, 7), MATRIZ_DE_COMPLIANCIAS(1, 8), MATRIZ_DE_COMPLIANCIAS(1, 9), MATRIZ_DE_COMPLIANCIAS(1, 10)
+(A8, A3, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6)
+*cfclos
+!*
+*cfopen, _datos5/matriz_de_desplazamientos_nodo_positivo, txt
+*VWRITE, pasos(1, 1), ' ', DESPLAZAMIENTO_NODO_POSITIVO(1, 1), DESPLAZAMIENTO_NODO_POSITIVO(1, 2), DESPLAZAMIENTO_NODO_POSITIVO(1, 3), DESPLAZAMIENTO_NODO_POSITIVO(1, 4), DESPLAZAMIENTO_NODO_POSITIVO(1, 5), DESPLAZAMIENTO_NODO_POSITIVO(1, 6), DESPLAZAMIENTO_NODO_POSITIVO(1, 7), DESPLAZAMIENTO_NODO_POSITIVO(1, 8), DESPLAZAMIENTO_NODO_POSITIVO(1, 9), DESPLAZAMIENTO_NODO_POSITIVO(1, 10)
+(A8, A3, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6)
+*cfclos
+!*
+*cfopen, _datos5/matriz_de_desplazamientos_nodo_negativo, txt
+*VWRITE, pasos(1, 1), ' ', DESPLAZAMIENTO_NODO_NEGATIVO(1, 1), DESPLAZAMIENTO_NODO_NEGATIVO(1, 2), DESPLAZAMIENTO_NODO_NEGATIVO(1, 3), DESPLAZAMIENTO_NODO_NEGATIVO(1, 4), DESPLAZAMIENTO_NODO_NEGATIVO(1, 5), DESPLAZAMIENTO_NODO_NEGATIVO(1, 6), DESPLAZAMIENTO_NODO_NEGATIVO(1, 7), DESPLAZAMIENTO_NODO_NEGATIVO(1, 8), DESPLAZAMIENTO_NODO_NEGATIVO(1, 9), DESPLAZAMIENTO_NODO_NEGATIVO(1, 10)
+(A8, A3, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6)
+*cfclos
+!*
+segundos_totales = tiempo_1-tiempo_00
+horas = (segundos_totales-MOD(segundos_totales, 3600))/3600
+minutos = (MOD(segundos_totales, 3600)-MOD(MOD(segundos_totales, 3600), 60))/60
+segundos = segundos_totales-3600*horas-60*minutos
+!*
+*cfopen, _datos5/duraciones_de_pasos, txt
+*VWRITE, duraciones_de_pasos(1, 1), duraciones_de_pasos(1, 2)
+(F8.0, g16.6)
+*cfclos
+!*
+AMESH, 7
+AMESH, 17
+AMESH, 47
+AMESH, 57
+AMESH, 57
+AMESH, 124
+VCLEAR, ALL
+/VIEW, 1, 1, 1, 1 
+/ANG, 1 
+/AUTO, 1 
+/REP, FAST
+/COLOR, OUTL, WHIT
+EPLOT
+/IMAGE, SAVE, '_imagenes5/SHELL'
+
+CDWRITE, DB, '_archivos5/prueba_corridas_shell_DB', 'cdb', , '', '' 
+CDWRITE, ALL, '_archivos5/prueba_corridas_shell', 'cdb', , '_archivos5/prueba_corridas_shell', 'iges' 
+!*
+*DIM, texto_resumen_1, STRING, 100, 1
+texto_resumen_1(1, 1) = 'Modelo de elementos finitos para el "Método de flexibilidad de Grietas" resuelto en ANSYS APDL.'
+*DIM, texto_resumen_2, STRING, 100, 1
+texto_resumen_2(1, 1) = 'Realizado por Ing. Gustavo F. Eichhorn'
+*DIM, texto_resumen_3, STRING, 100, 1
+texto_resumen_3(1, 1) = 'E-Mail: eichhorn.gustavof@gmail.com '
+*DIM, texto_resumen_4, STRING, 100, 1
+texto_resumen_4(1, 1) = 'Tipos de elementos utilizados: '
+*DIM, texto_resumen_5, STRING, 100, 1
+texto_resumen_5(1, 1) = 'Propiedades elasticas ortotrópicas de laminado compuesto utilizado:'
+!*
+*CFOPEN, _datos5/RESUMEN, txt, , 
+*VWRITE, texto_resumen_1(1), texto_resumen_1(9), texto_resumen_1(17), texto_resumen_1(25), texto_resumen_1(33), texto_resumen_1(41), texto_resumen_1(49), texto_resumen_1(57), texto_resumen_1(65), texto_resumen_1(73), texto_resumen_1(81), texto_resumen_1(89)
+(12A)
+*VWRITE, ' '
+(A3)
+*VWRITE, texto_resumen_2(1), texto_resumen_2(9), texto_resumen_2(17), texto_resumen_2(25), texto_resumen_2(33)
+(5A)
+*VWRITE, ' '
+(A3)
+*VWRITE, texto_resumen_3(1), texto_resumen_3(9), texto_resumen_3(17), texto_resumen_3(25), texto_resumen_3(33)
+(5A)
+*VWRITE, ' '
+(A3)
+*VWRITE, texto_resumen_4(1), texto_resumen_4(9), texto_resumen_4(17), texto_resumen_4(25)
+(4A)
+*VWRITE, 'SOLID', CHRVAL(TIPO_DE_ELEMENTO_SOLIDO)
+(A5,A3)
+*VWRITE, 'SHELL',CHRVAL(TIPO_DE_ELEMENTO_SUPERFICIE)
+(A5,A3)
+*VWRITE, 'Tamaño d','e malla:',' ',CHRVAL(TAMANIO_MALLA),' mm'
+(2A,A1,A1,A3)
+*VWRITE, ' '
+(A3)
+*VWRITE, 'Cantidad', ' de nodo', 's y de e', 'lementos', ':'
+(5A)
+*VWRITE, 'Nodos: ', CHRVAL(NUMERO_DE_NODOS) 
+(3A)
+*VWRITE, 'Elemento', 's: ', CHRVAL(NUMERO_DE_ELEMENTOS)
+(A, A3, 2A)
+*VWRITE, ' '
+(A3)
+*VWRITE, texto_resumen_5(1), texto_resumen_5(9), texto_resumen_5(17), texto_resumen_5(25), texto_resumen_5(33), texto_resumen_5(41), texto_resumen_5(49), texto_resumen_5(57), texto_resumen_5(65)
+(9A)
+*VWRITE, prop_material_string(1, 1), ':', prop_material(1), prop_material_string_unidades(1, 1)
+(A5, A3, g16.6, A5)
+*VWRITE, ' '
+(A3)
+*VWRITE, 'Matriz d', 'e flexib', 'ilidad (', 'o de com', 'pliancia', 's):'
+(6A)
+*VWRITE, pasos(1, 1), ' ', MATRIZ_DE_COMPLIANCIAS(1, 1), MATRIZ_DE_COMPLIANCIAS(1, 2), MATRIZ_DE_COMPLIANCIAS(1, 3), MATRIZ_DE_COMPLIANCIAS(1, 4), MATRIZ_DE_COMPLIANCIAS(1, 5), MATRIZ_DE_COMPLIANCIAS(1, 6), MATRIZ_DE_COMPLIANCIAS(1, 7), MATRIZ_DE_COMPLIANCIAS(1, 8), MATRIZ_DE_COMPLIANCIAS(1, 9), MATRIZ_DE_COMPLIANCIAS(1, 10)
+(A8, A3, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6)
+*VWRITE, ' '
+(A3)
+*VWRITE, 'Matriz ', 'de ', 'desplaza', 'miento ', 'del nodo', ' positiv', 'o de la ', 'galga:'
+(A, A3, A, A7, 3A, A6)
+*VWRITE, pasos(1, 1), ' ', DESPLAZAMIENTO_NODO_POSITIVO(1, 1), DESPLAZAMIENTO_NODO_POSITIVO(1, 2), DESPLAZAMIENTO_NODO_POSITIVO(1, 3), DESPLAZAMIENTO_NODO_POSITIVO(1, 4), DESPLAZAMIENTO_NODO_POSITIVO(1, 5), DESPLAZAMIENTO_NODO_POSITIVO(1, 6), DESPLAZAMIENTO_NODO_POSITIVO(1, 7), DESPLAZAMIENTO_NODO_POSITIVO(1, 8), DESPLAZAMIENTO_NODO_POSITIVO(1, 9), DESPLAZAMIENTO_NODO_POSITIVO(1, 10)
+(A8, A3, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6)
+*VWRITE, ' '
+(A3)
+*VWRITE, 'Matriz ', 'de ', 'desplaza', 'miento ', 'del nodo', ' negativ', 'o de la ', 'galga:'
+(A, A3, A, A7, 3A, A6)
+*VWRITE, pasos(1, 1), ' ', DESPLAZAMIENTO_NODO_NEGATIVO(1, 1), DESPLAZAMIENTO_NODO _NEGATIVO(1, 2), DESPLAZAMIENTO_NODO _NEGATIVO(1, 3), DESPLAZAMIENTO_NODO _NEGATIVO(1, 4), DESPLAZAMIENTO_NODO _NEGATIVO(1, 5), DESPLAZAMIENTO_NODO _NEGATIVO(1, 6), DESPLAZAMIENTO_NODO _NEGATIVO(1, 7), DESPLAZAMIENTO_NODO _NEGATIVO(1, 8), DESPLAZAMIENTO_NODO _NEGATIVO(1, 9), DESPLAZAMIENTO_NODO _NEGATIVO(1, 10)
+(A8, A3, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6, g16.6)
+*VWRITE, ' '
+(A3)
+*VWRITE, 'Duracion', ' total d', 'e la sim', 'ulacion:', ' ', segundos_totales, ' segundo', 's. (', CHRVAL(horas), 'hr;', CHRVAL(minutos), 'min;', CHRVAL(segundos), 'seg).'
+(4A, A1, g16.6, A, A4, A2, A3, A2, A4, A, A5)
+*cfclos
+!*
+/UIS, MSGPOP, 0
+*MSG, NOTE, NUMERO_DE_ITERACIONES, segundos_totales, horas, minutos, segundos
+El programa ha finalizado de ejecutar el analisis. %/&
+El número de iteraciones en total es de %I ejecuciones. %/&
+La duracion de esta corrida es de %G segundos (%I hr; %I min; %G seg).
+/UIS, MSGPOP, 3
+!* 
