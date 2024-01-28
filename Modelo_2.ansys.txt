@@ -1,5 +1,5 @@
 !*
-!*/INPUT,_codigo/Modelo_2.ansys, txt
+!*/INPUT, _codigo/Modelo_2.ansys, txt
 !*
 !* 
 /NOPR 
@@ -32,13 +32,34 @@ KEYW, PR_MULTI, 0
 /PREP7 
 !* 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!Parametros de entrada que definen la configuracion deseada del estudio
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+TIPO_DE_ELEMENTO_SOLIDO = 185
+!TIPO_DE_ELEMENTO_SOLIDO = 186
+!* 
+TIPO_DE_ELEMENTO_SUPERFICIE = 181
+!TIPO_DE_ELEMENTO_SUPERFICIE = 281
+!* 
+!TAMANIO_MALLA = 1
+TAMANIO_MALLA = 2
+!Solid 186; Tamaño de malla 2
+!NODO_POSITIVO = 39
+!NODO_NEGATIVO = 4359
+!Solid 186; Tamaño de malla 1
+NODO_POSITIVO = 75
+NODO_NEGATIVO = 15368
+!Solid 185; Tamaño de malla 1
+!NODO_POSITIVO = 25
+!NODO_NEGATIVO = 4470
+!Solid 185; Tamaño de malla 2
+!NODO_POSITIVO = 1284
+!NODO_NEGATIVO = 13
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!Selección de los tipos de elementos a utilizar en el proyecto 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-ET, 1, SOLID186
-!ET, 1, SOLID185
+ET, 1, SOLID%TIPO_DE_ELEMENTO_SOLIDO%
 !* 
-ET, 2, SHELL281
-!ET, 2, SHELL181 
+ET, 2, SHELL%TIPO_DE_ELEMENTO_SUPERFICIE% 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!Creación del material ortotrópico del compuesto 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
@@ -243,8 +264,7 @@ VPLOT
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
 VATT, 1, , 1, 0
 AATT, 1, , 2, 0, 1
-TAMANIO_MALLA = 0.8
-!TAMANIO_MALLA = 1
+TAMANIO_MALLA = 1
 !TAMANIO_MALLA = 2
 ESIZE, TAMANIO_MALLA, 0, 
 !*
@@ -258,36 +278,35 @@ EPLOT
 *GET, NUMERO_DE_ELEMENTOS, ELEM, , COUNT
 *GET, NUMERO_DE_NODOS, NODE, , COUNT
 !*
-/UIS, MSGPOP, 0
-*MSG, UI, NUMERO_DE_ELEMENTOS, NUMERO_DE_NODOS
-El número de elementos en el modelo sólido es de %I %/&
-El número de nodos en el modelo sólido es de %I
-/UIS, MSGPOP, 3
-!*
-!Solid 186; Tamaño de malla 2
-!NODO_POSITIVO = 39
-!NODO_NEGATIVO = 4359
-!Solid 186; Tamaño de malla 1
-!NODO_POSITIVO = 75
-!NODO_NEGATIVO = 15368
-!Solid 185; Tamaño de malla 1
-!NODO_POSITIVO = 25
-!NODO_NEGATIVO = 4470
-!Solid 185; Tamaño de malla 2
-!NODO_POSITIVO = 1284
-!NODO_NEGATIVO = 13
-!Solid 186; Tamaño de malla 0.8
-NODO_POSITIVO = 23401
-NODO_NEGATIVO = 93
 NSEL, S, , , NODO_POSITIVO
 CM, extremo_galga_positivo, NODE
 ALLSEL, ALL
 NSEL, S, , , NODO_NEGATIVO
 CM, extremo_galga_negativo, NODE
 ALLSEL, ALL
+!*
+NSEL, S, LOC, X, -1.5875
+NSEL, A, LOC, X, 1.5875
+NSEL, R, LOC, Y, 49.975 
+NSEL, R, LOC, Z, 12.7
+NLIST, ALL, , , , NODE, NODE, NODE
+ALLSEL, ALL
+!*
+!********************** Verificar que las variables 'extremo_galga_positivo' y 'extremo_galga_negativo'***********
+!**************************** coincidan con los valores de la lista para nodos ubicados en **********************
+!***************************************** ±X = 1.5875; Y = 49.975; Z = 12.7 *************************************
+!************************ ya que el numero de nodo de esa ubicacion cambia según el ******************************
+!************************ tipo de elemento (SOLID185 o SOLID186) y el tamaño de malla ****************************
+!*
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!Cambiando el sistema de coordenadas de los elementos creados para que tengan configurado correctamente su ángulo respecto de la capa a la que pertenecen
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+!*
+/UIS, MSGPOP, 0
+*MSG, UI, NUMERO_DE_ELEMENTOS, NUMERO_DE_NODOS
+El número de elementos en el modelo sólido es de %I %/&
+El número de nodos en el modelo sólido es de %I
+/UIS, MSGPOP, 3
 !Establezco un parámetro llamado PI con el valor de π
 *SET, PI, ATAN(1)*4
 *DIM, CENTROIDES, ARRAY, NUMERO_DE_ELEMENTOS, 7, 1
@@ -671,10 +690,12 @@ texto_resumen_5(1, 1) = 'Propiedades elasticas ortotrópicas de laminado compues
 (A3)
 *VWRITE, texto_resumen_4(1), texto_resumen_4(9), texto_resumen_4(17), texto_resumen_4(25)
 (4A)
-*VWRITE, 'SOLID186', 
-(A)
-*VWRITE, 'SHELL281'
-(A)
+*VWRITE, 'SOLID', CHRVAL(TIPO_DE_ELEMENTO_SOLIDO)
+(A5,A3)
+*VWRITE, 'SHELL',CHRVAL(TIPO_DE_ELEMENTO_SUPERFICIE)
+(A5,A3)
+*VWRITE, 'Tamaño d','e malla:',' ',CHRVAL(TAMANIO_MALLA),' mm'
+(2A,A1,A1,A3)
 *VWRITE, ' '
 (A3)
 *VWRITE, 'Cantidad', ' de nodo', 's y de e', 'lementos', ':'
