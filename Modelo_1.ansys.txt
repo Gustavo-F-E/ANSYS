@@ -31,17 +31,38 @@ KEYW, PR_MULTI, 0
 /PREP7 
 !* 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!Parametros de entrada que definen la configuracion deseada del estudio
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+TIPO_DE_ELEMENTO_SOLIDO = 185
+!TIPO_DE_ELEMENTO_SOLIDO = 186
+!* 
+TIPO_DE_ELEMENTO_SUPERFICIE = 181
+!TIPO_DE_ELEMENTO_SUPERFICIE = 281
+!* 
+!TAMANIO_MALLA = 1
+TAMANIO_MALLA = 2
+!Solid 186; Tamaño de malla 2
+!NODO_POSITIVO = 44
+!NODO_NEGATIVO = 47672
+!Solid 186; Tamaño de malla 1
+NODO_POSITIVO = 83
+NODO_NEGATIVO = 181556
+!Solid 185; Tamaño de malla 1
+!NODO_POSITIVO = 42
+!NODO_NEGATIVO = 46536
+!Solid 185; Tamaño de malla 2
+!NODO_POSITIVO = 22
+!NODO_NEGATIVO = 12370
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!Selección de los tipos de elementos a utilizar en el proyecto 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-!ET, 1, SOLID186
-ET, 1, SOLID185
+ET, 1, SOLID%TIPO_DE_ELEMENTO_SOLIDO%
 KEYOPT, 2, 2, 0
 KEYOPT, 2, 3, 1
 KEYOPT, 2, 6, 0
 KEYOPT, 2, 8, 0
 !* 
-!ET, 2, SHELL281
-ET, 2, SHELL181 
+ET, 2, SHELL%TIPO_DE_ELEMENTO_SUPERFICIE% 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !* 
 !!!!!!!!!!!!!!!!Creación del material ortotrópico del compuesto 
@@ -178,8 +199,8 @@ VPLOT
 !!!!!!!!!!!!!!!!MALLADO 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
 VATT, 1, , 1, 0
-!TAMANIO_MALLA = 1
-TAMANIO_MALLA = 2
+TAMANIO_MALLA = 1
+!TAMANIO_MALLA = 2
 LESIZE, ALL, TAMANIO_MALLA, , , , , , , 1
 !*
 *DIM, MALLADO_VOLUMENES, ARRAY, 100, 4, 1
@@ -276,30 +297,31 @@ EPLOT
 *GET, NUMERO_DE_ELEMENTOS, ELEM, , COUNT
 *GET, NUMERO_DE_NODOS, NODE, , COUNT
 !*
-/UIS, MSGPOP, 0
-*MSG, UI, NUMERO_DE_ELEMENTOS, NUMERO_DE_NODOS
-El número de elementos en el modelo sólido es de %I %/&
-El número de nodos en el modelo sólido es de %I
-/UIS, MSGPOP, 3
-!*
-!Solid 186; Tamaño de malla 2
-!NODO_POSITIVO = 44
-!NODO_NEGATIVO = 47672
-!Solid 186; Tamaño de malla 1
-!NODO_POSITIVO = 83
-!NODO_NEGATIVO = 181556
-!Solid 185; Tamaño de malla 1
-!NODO_POSITIVO = 42
-!NODO_NEGATIVO = 46536
-!Solid 185; Tamaño de malla 2
-NODO_POSITIVO = 22
-NODO_NEGATIVO = 12370
 NSEL, S, , , NODO_POSITIVO
 CM, extremo_galga_Z_positivo, NODE
 ALLSEL, ALL
 NSEL, S, , , NODO_NEGATIVO
 CM, extremo_galga_Z_negativo, NODE
 ALLSEL, ALL
+!*
+NSEL, S, LOC, X, -1.5875
+NSEL, A, LOC, X, 1.5875
+NSEL, R, LOC, Y, 49.975 
+NSEL, R, LOC, Z, 12.7
+NLIST, ALL, , , , NODE, NODE, NODE
+ALLSEL, ALL
+!*
+!********************** Verificar que las variables 'extremo_galga_positivo' y 'extremo_galga_negativo'***********
+!**************************** coincidan con los valores de la lista para nodos ubicados en **********************
+!***************************************** ±X = 1.5875; Y = 49.975; Z = 12.7 *************************************
+!************************ ya que el numero de nodo de esa ubicacion cambia según el ******************************
+!************************ tipo de elemento (SOLID185 o SOLID186) y el tamaño de malla ****************************
+!*
+/UIS, MSGPOP, 0
+*MSG, UI, NUMERO_DE_ELEMENTOS, NUMERO_DE_NODOS
+El número de elementos en el modelo sólido es de %I %/&
+El número de nodos en el modelo sólido es de %I
+/UIS, MSGPOP, 3
 !*
 *DIM, BORRAR_VOLUMEN, ARRAY, 10, 1, 1
 BORRAR_VOLUMEN(1, 1, 1) = 81, 80, 79, 78, 77, 76, 75, 74, 73, 72
@@ -331,14 +353,14 @@ FUERZA_AREAS(1, 2, 1) = 420, 415, 410, 405, 400, 395, 390, 385, 380, 375
 *GET, tiempo_0, ACTIVE, , TIME, CPU
 tiempo_00 = tiempo_0
 !*
-CDWRITE, ALL, '_archivos/prueba_corridas', 'cdb', , '_archivos/prueba_corridas%', 'iges' 
+CDWRITE, ALL, '_archivos/prueba_corridas', 'cdb', , '_archivos/prueba_corridas', 'iges' 
 CDWRITE, DB, '_archivos/prueba_corridas_DB', 'cdb', , '', '' 
 !*
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!! Comienzo de las iteraciones
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !*
-*DO, jj, 1, 1, 1
+*DO, jj, 1, 10, 1
 VCLEAR, BORRAR_VOLUMEN(jj, 1, 1)
 VDELE, BORRAR_VOLUMEN(jj, 1, 1)
 /REPLOT
@@ -519,7 +541,7 @@ texto_resumen_4(1, 1) = 'Tipos de elementos utilizados: '
 *DIM, texto_resumen_5, STRING, 100, 1
 texto_resumen_5(1, 1) = 'Propiedades elasticas ortotrópicas de laminado compuesto utilizado:'
 !*
-*CFOPEN, _datos2/RESUMEN, txt, , 
+*CFOPEN, _datos/RESUMEN, txt, , 
 *VWRITE, texto_resumen_1(1),texto_resumen_1(9),texto_resumen_1(17),texto_resumen_1(25),texto_resumen_1(33),texto_resumen_1(41),texto_resumen_1(49),texto_resumen_1(57),texto_resumen_1(65),texto_resumen_1(73),texto_resumen_1(81),texto_resumen_1(89)
 (12A)
 *VWRITE, ' '
@@ -534,10 +556,12 @@ texto_resumen_5(1, 1) = 'Propiedades elasticas ortotrópicas de laminado compues
 (A3)
 *VWRITE, texto_resumen_4(1),texto_resumen_4(9),texto_resumen_4(17),texto_resumen_4(25)
 (4A)
-*VWRITE, 'SOLID186',
-(A)
-*VWRITE, 'SHELL281'
-(A)
+*VWRITE, 'SOLID', CHRVAL(TIPO_DE_ELEMENTO_SOLIDO)
+(A5,A3)
+*VWRITE, 'SHELL',CHRVAL(TIPO_DE_ELEMENTO_SUPERFICIE)
+(A5,A3)
+*VWRITE, 'Tamaño d','e malla:',' ',CHRVAL(TAMANIO_MALLA),' mm'
+(2A,A1,A1,A3)
 *VWRITE, ' '
 (A3)
 *VWRITE, 'Cantidad',' de nodo','s y de e','lementos',':'
