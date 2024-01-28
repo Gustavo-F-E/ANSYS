@@ -1,5 +1,5 @@
 !*
-!*/INPUT, Modelo_2.ansys, txt
+!*/INPUT,_codigo/Modelo_2.ansys, txt
 !*
 !* 
 /NOPR 
@@ -34,11 +34,11 @@ KEYW, PR_MULTI, 0
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!Selección de los tipos de elementos a utilizar en el proyecto 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-!ET, 1, SOLID186
-ET, 1, SOLID185
+ET, 1, SOLID186
+!ET, 1, SOLID185
 !* 
-!ET, 2, SHELL281
-ET, 2, SHELL181 
+ET, 2, SHELL281
+!ET, 2, SHELL181 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!Creación del material ortotrópico del compuesto 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
@@ -243,8 +243,9 @@ VPLOT
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
 VATT, 1, , 1, 0
 AATT, 1, , 2, 0, 1
+TAMANIO_MALLA = 0.8
 !TAMANIO_MALLA = 1
-TAMANIO_MALLA = 2
+!TAMANIO_MALLA = 2
 ESIZE, TAMANIO_MALLA, 0, 
 !*
 *DO, i, 1, 100, 1
@@ -264,17 +265,20 @@ El número de nodos en el modelo sólido es de %I
 /UIS, MSGPOP, 3
 !*
 !Solid 186; Tamaño de malla 2
-!NODO_POSITIVO = 44
-!NODO_NEGATIVO = 47672
+!NODO_POSITIVO = 39
+!NODO_NEGATIVO = 4359
 !Solid 186; Tamaño de malla 1
-!NODO_POSITIVO = 83
-!NODO_NEGATIVO = 181556
+!NODO_POSITIVO = 75
+!NODO_NEGATIVO = 15368
 !Solid 185; Tamaño de malla 1
-!NODO_POSITIVO = 42
-!NODO_NEGATIVO = 46536
+!NODO_POSITIVO = 25
+!NODO_NEGATIVO = 4470
 !Solid 185; Tamaño de malla 2
-NODO_POSITIVO = 1284
-NODO_NEGATIVO = 13
+!NODO_POSITIVO = 1284
+!NODO_NEGATIVO = 13
+!Solid 186; Tamaño de malla 0.8
+NODO_POSITIVO = 23401
+NODO_NEGATIVO = 93
 NSEL, S, , , NODO_POSITIVO
 CM, extremo_galga_positivo, NODE
 ALLSEL, ALL
@@ -482,14 +486,14 @@ FUERZA_AREAS(1, 2, 1)= 590, 565, 540, 515, 490, 465, 440, 415, 390, 365
 *GET, tiempo_0, ACTIVE, , TIME, CPU
 tiempo_00 = tiempo_0
 !*
-CDWRITE, ALL, '_archivos2/prueba_corridas', 'cdb', , '_archivos2/prueba_corridas%', 'iges' 
+CDWRITE, ALL, '_archivos2/prueba_corridas', 'cdb', , '_archivos2/prueba_corridas', 'iges' 
 CDWRITE, DB, '_archivos2/prueba_corridas_DB', 'cdb', , '', '' 
 !*
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!! Comienzo de las iteraciones
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !*
-*DO, jj, 1, 1, 1
+*DO, jj, 1, 10, 1
 VCLEAR, BORRAR_VOLUMEN(jj, 1, 1)
 VDELE, BORRAR_VOLUMEN(jj, 1, 1)
 /REPLOT
