@@ -40,20 +40,29 @@ TIPO_DE_ELEMENTO_SOLIDO = 185
 TIPO_DE_ELEMENTO_SUPERFICIE = 181
 !TIPO_DE_ELEMENTO_SUPERFICIE = 281
 !* 
+!TAMANIO_MALLA = 0.8
 !TAMANIO_MALLA = 1
 TAMANIO_MALLA = 2
+!*
 !Solid 186; Tamaño de malla 2
-!NODO_POSITIVO = 39
-!NODO_NEGATIVO = 4359
+!NODO_POSITIVO = 4359
+!NODO_NEGATIVO = 39
+!*
 !Solid 186; Tamaño de malla 1
-NODO_POSITIVO = 75
-NODO_NEGATIVO = 15368
+!NODO_POSITIVO = 15368
+!NODO_NEGATIVO = 75
+!*
 !Solid 185; Tamaño de malla 1
-!NODO_POSITIVO = 25
-!NODO_NEGATIVO = 4470
+!NODO_POSITIVO = 4470
+!NODO_NEGATIVO = 25
+!*
 !Solid 185; Tamaño de malla 2
-!NODO_POSITIVO = 1284
-!NODO_NEGATIVO = 13
+NODO_POSITIVO = 1284
+NODO_NEGATIVO = 13
+!*
+!Solid 186; Tamaño de malla 0.8
+!NODO_POSITIVO = 23401
+!NODO_NEGATIVO = 93
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!Selección de los tipos de elementos a utilizar en el proyecto 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
@@ -285,6 +294,7 @@ NSEL, S, , , NODO_NEGATIVO
 CM, extremo_galga_negativo, NODE
 ALLSEL, ALL
 !*
+! Si se desea evaluar si los nodos están seteados correctamente
 NSEL, S, LOC, X, -1.5875
 NSEL, A, LOC, X, 1.5875
 NSEL, R, LOC, Y, 49.975 
